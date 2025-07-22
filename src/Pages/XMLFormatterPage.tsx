@@ -1,19 +1,6 @@
 import { useState } from 'react';
 import styles from './XMLFormatterPage.module.css';
 
-const formatDate = (date: Date) => {
-  return date.toLocaleString('en-US', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-    hour12: true,
-    timeZoneName: 'short',
-  });
-};
-
 // Simple XML pretty print helper function
 const prettyPrintXml = (xml: string): string => {
   const PADDING = '  '; // two spaces
@@ -22,7 +9,6 @@ const prettyPrintXml = (xml: string): string => {
   let pad = 0;
   xml = xml.replace(reg, '$1\n$2$3');
   xml.split('\n').forEach((line) => {
-    let indent = 0;
     if (line.match(/^<\/\w/)) pad -= 1;
     formatted += PADDING.repeat(pad) + line + '\n';
     if (line.match(/^<\w[^>]*[^\/]>.*$/)) pad += 1;
